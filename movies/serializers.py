@@ -16,7 +16,10 @@ class MovieSerializer(serializers.Serializer):
                                         # **은 언패킹: 리스트나 딕셔너리 형태로 감싸져  있는 값을 풀어서 씀 
 
 class ActorSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
+    id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
     gender = serializers.CharField()
     birth_date = serializers.DateField()
+
+    def create(self, validated_data):
+        return Actor.objects.create(**validated_data)
