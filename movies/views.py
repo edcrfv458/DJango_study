@@ -26,6 +26,10 @@ def movie_list(request):
         return Response(serializer.errors)
 # Create your views here.
 
+@api_view(['GET', 'PATCH', 'DELETE'])
+def movie_detail(request, pk):
+    pass
+
 @api_view(['GET', 'POST'])
 def actor_list(request):
     if request.method == 'GET':
