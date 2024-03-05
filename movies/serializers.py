@@ -15,6 +15,14 @@ class MovieSerializer(serializers.Serializer):
         return Movie.objects.create(**validated_data)   # 모델에 값을 넣어 주면 데이터가 생성
                                         # **은 언패킹: 리스트나 딕셔너리 형태로 감싸져  있는 값을 풀어서 씀 
 
+    def update(self, instance, validated_data):     # instance는 수정할 데이터
+        instance.name = validated_data.get('name', instance.name)
+        instance.opening_date = validated_data.get('opening_date', instance.opening_date)
+        instance.running_time = validated_data.get('running_time', instance.running_time)
+        instance.overview = validated_data.get('overview', instance.overview)
+        instance.save()
+        return instance
+
 class ActorSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
